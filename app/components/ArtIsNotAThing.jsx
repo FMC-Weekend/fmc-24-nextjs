@@ -1,6 +1,6 @@
 export default function ArtIsNotAThing() {
     return (
-      <div className="flex min-h-screen bg-black text-white">
+      <div className="flex min-h-screen bg-black text-white mt-60">
         {/* Left Section */}
         <div className="w-1/4 flex flex-col justify-start py-8 pl-8 space-y-4">
           <h1 className="text-5xl font-extrabold">
