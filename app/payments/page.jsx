@@ -1,5 +1,6 @@
 'use client'
 import React, { useEffect, useState } from 'react';
+import payments from './../../utils/payments/data';
 import { ExternalLink, X, Download } from 'lucide-react';
 
 const addDummyData = (payment) => {
@@ -64,22 +65,26 @@ export default function PaymentPage() {
   const [modalImage, setModalImage] = useState(null);
   const [searchEmail, setSearchEmail] = useState(''); 
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/payments`,
-          {
-            method: "GET",
-          }
-        );
-        const payments = await res.json();
-        const enhancedPayments = payments.map(addDummyData);
+    // (async () => {
+    //   try {
+    //     const res = await fetch(
+    //       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/payments`,
+    //       {
+    //         method: "GET",
+    //       }
+    //     );
+    //     const payments = await res.json();
+    //     const enhancedPayments = payments.map(addDummyData);
+    //     // console.log(enhancedPayments);
+    //     setData(enhancedPayments.reverse());
+    //   } catch (error) {
+    //     console.error("Error fetching payments:", error);
+    //   }
+    // })();
+    console.log(payments);
+    const enhancedPayments = payments.map(addDummyData);
         // console.log(enhancedPayments);
         setData(enhancedPayments.reverse());
-      } catch (error) {
-        console.error("Error fetching payments:", error);
-      }
-    })();
   }, []);
 
   const openModal = (imageUrl) => {
