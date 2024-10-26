@@ -1,6 +1,8 @@
 'use client'
 import React, { useEffect, useState } from 'react';
+import payments from './../../utils/payments/data';
 import { ExternalLink, X, Download } from 'lucide-react';
+import { getEventById } from '../../utils/events/events';
 
 const addDummyData = (payment) => {
   const dummyItems = ['Cine', 'Photog', 'Media', 'Outreach', 'Animation'];
@@ -64,22 +66,29 @@ export default function PaymentPage() {
   const [modalImage, setModalImage] = useState(null);
   const [searchEmail, setSearchEmail] = useState(''); 
   useEffect(() => {
-    (async () => {
-      try {
-        const res = await fetch(
-          `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/payments`,
-          {
-            method: "GET",
-          }
-        );
-        const payments = await res.json();
-        const enhancedPayments = payments.map(addDummyData);
-        // console.log(enhancedPayments);
+    // (async () => {
+    //   try {
+    //     const res = await fetch(
+    //       `${process.env.NEXT_PUBLIC_BACKEND_URL}/api/payments`,
+    //       {
+    //         method: "GET",
+    //       }
+    //     );
+    //     const payments = await res.json();
+    //     const enhancedPayments = payments.map(addDummyData);
+    //     // console.log(enhancedPayments);
+    //     setData(enhancedPayments.reverse());
+    //   } catch (error) {
+    //     console.error("Error fetching payments:", error);
+    //   }
+    // })();
+    // console.log(payments);
+    const enhancedPayments = payments.map(addDummyData).map((payment)=>{
+      return {...payment,purchased_events:payment["purchased_events"].map(item=>getEventById(item)["name"])}
+    });
+    
+        console.log(enhancedPayments);
         setData(enhancedPayments.reverse());
-      } catch (error) {
-        console.error("Error fetching payments:", error);
-      }
-    })();
   }, []);
 
   const openModal = (imageUrl) => {
