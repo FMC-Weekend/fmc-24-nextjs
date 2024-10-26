@@ -2,6 +2,7 @@
 import React, { useEffect, useState } from 'react';
 import payments from './../../utils/payments/data';
 import { ExternalLink, X, Download } from 'lucide-react';
+import { getEventById } from '../../utils/events/events';
 
 const addDummyData = (payment) => {
   const dummyItems = ['Cine', 'Photog', 'Media', 'Outreach', 'Animation'];
@@ -81,9 +82,12 @@ export default function PaymentPage() {
     //     console.error("Error fetching payments:", error);
     //   }
     // })();
-    console.log(payments);
-    const enhancedPayments = payments.map(addDummyData);
-        // console.log(enhancedPayments);
+    // console.log(payments);
+    const enhancedPayments = payments.map(addDummyData).map((payment)=>{
+      return {...payment,purchased_events:payment["purchased_events"].map(item=>getEventById(item)["name"])}
+    });
+    
+        console.log(enhancedPayments);
         setData(enhancedPayments.reverse());
   }, []);
 
