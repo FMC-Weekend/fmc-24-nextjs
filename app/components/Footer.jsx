@@ -62,7 +62,7 @@ const Footer = () => {
             <Image src={logo} alt="Company Logo" width={350} height={250} />
           </div>
           <p className="text-lg mb-4">IIT (BHU), Varanasi, India</p>
-          <p className="text-lg mb-4">Phone: +91 95693 87584</p>
+          <p className="text-lg mb-4">Phone: +91 9310825339</p>
           <p className="text-lg mb-4">Email: info@fmcweekend.com</p>
           <div className="flex space-x-4">
             <a target="_blank" href="https://www.facebook.com/fmcweekendiitbhu/" className="text-red-400 hover:underline gap-0 flex ">
